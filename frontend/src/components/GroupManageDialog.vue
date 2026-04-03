@@ -111,6 +111,6 @@ async function handleDeleteGroup(id) {
 }
 
 .group-table {
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
 }
 </style>

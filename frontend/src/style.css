@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 * {
   margin: 0;
@@ -10,23 +10,70 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #333;
-  background: #f5f5fa;
+  color: #1e293b;
+  background: #f1f5f9;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 :root {
+  /* 品牌色：Aurora 主题 */
+  --brand-primary: #6366f1;
+  --brand-primary-hover: #4f46e5;
+  --brand-secondary: #06b6d4;
+  --brand-gradient: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+  --brand-gradient-hover: linear-gradient(135deg, #4f46e5 0%, #0891b2 100%);
+  --brand-gradient-soft: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(6,182,212,0.08) 100%);
+
+  /* 功能色 */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-favorite: #f59e0b;
+
+  /* 中性色 */
+  --color-bg: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f8fafc;
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-text-tertiary: #94a3b8;
+
+  /* 侧边栏 */
+  --sidebar-bg: #0f172a;
+  --sidebar-surface: rgba(255,255,255,0.05);
+  --sidebar-text: rgba(255,255,255,0.6);
+  --sidebar-text-active: #ffffff;
+  --sidebar-accent: var(--brand-gradient);
+
+  /* 圆角 */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.08);
+  --shadow-glow: 0 0 20px rgba(99,102,241,0.15);
+
+  /* Element Plus 覆盖 */
   --el-color-primary: #6366f1;
   --el-color-primary-light-3: #818cf8;
   --el-color-primary-light-5: #a5b4fc;
   --el-color-primary-light-7: #c7d2fe;
-  --el-color-primary-light-9: #e0e7ff;
+  --el-color-primary-light-9: #eef2ff;
   --el-color-primary-dark-2: #4f46e5;
+  --el-border-radius-base: 8px;
 }
 
-/* 全局滚动条美化 */
+/* 全局滚动条 */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -34,10 +81,51 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d0d0e0;
-  border-radius: 3px;
+  background: #cbd5e1;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b0b0c8;
+  background: #94a3b8;
+}
+
+/* Element Plus 全局覆盖 */
+.el-button--primary {
+  background: var(--brand-gradient) !important;
+  border: none !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.el-button--primary:hover {
+  background: var(--brand-gradient-hover) !important;
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-1px);
+}
+
+.el-button--primary:active {
+  transform: translateY(0);
+}
+
+.el-dialog {
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+}
+
+.el-dialog__header {
+  padding: 20px 24px 16px !important;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.el-dialog__body {
+  padding: 20px 24px !important;
+}
+
+.el-dialog__footer {
+  padding: 12px 24px 20px !important;
+}
+
+.el-tag {
+  border-radius: 20px !important;
+  font-weight: 500;
 }

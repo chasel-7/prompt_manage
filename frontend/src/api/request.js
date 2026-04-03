@@ -12,6 +12,10 @@ const request = axios.create({
 // 响应拦截器
 request.interceptors.response.use(
     (response) => {
+        // blob 类型（文件下载）直接返回 data
+        if (response.config.responseType === 'blob') {
+            return response.data
+        }
         const res = response.data
         if (res.code !== 200) {
             ElMessage.error(res.msg || '请求失败')

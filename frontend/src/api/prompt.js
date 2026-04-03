@@ -44,3 +44,27 @@ export function restorePrompt(id) {
 export function forceDeletePrompt(id) {
     return request.delete(`/prompts/${id}/force`)
 }
+
+/** 导出提示词为 Excel（返回 blob） */
+export function exportPrompts(params) {
+    return request.get('/prompts/export', {
+        params,
+        responseType: 'blob'
+    })
+}
+
+/** 导入提示词 Excel 文件 */
+export function importPrompts(file) {
+    const formData = new FormData()
+    formData.append('file', file)
+    return request.post('/prompts/import', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+    })
+}
+
+/** 下载导入模板 Excel */
+export function downloadImportTemplate() {
+    return request.get('/prompts/import-template', {
+        responseType: 'blob'
+    })
+}

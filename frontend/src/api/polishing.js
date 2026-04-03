@@ -1,8 +1,16 @@
 import request from './request'
 
-/** 执行润色 */
-export function polishText(text, strategy) {
-  return request.post('/polishing', { text, strategy })
+/** 执行润色（支持前端传入模型配置） */
+export function polishText(text, strategy, modelConfig = null) {
+  const body = { text, strategy }
+  if (modelConfig && modelConfig.apiKey) {
+    body.modelConfig = {
+      model: modelConfig.model,
+      apiKey: modelConfig.apiKey,
+      baseUrl: modelConfig.baseUrl
+    }
+  }
+  return request.post('/polishing', body)
 }
 
 /** 查询润色历史 */

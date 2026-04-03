@@ -80,6 +80,6 @@ async function handleDelete(id) {
 }
 
 .tag-item {
-  border-radius: 6px;
+  border-radius: 20px;
 }
 </style>

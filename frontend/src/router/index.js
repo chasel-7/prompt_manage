@@ -4,7 +4,7 @@ const routes = [
     {
         path: '/',
         component: () => import('../layout/MainLayout.vue'),
-        redirect: '/prompts',
+        redirect: '/filler',
         children: [
             {
                 path: 'prompts',
