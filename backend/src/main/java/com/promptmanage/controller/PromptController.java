@@ -6,9 +6,19 @@ import com.promptmanage.dto.PromptQueryParam;
 import com.promptmanage.dto.PromptRequest;
 import com.promptmanage.entity.Prompt;
 import com.promptmanage.service.PromptService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+
 
 /**
  * 提示词管理 Controller
@@ -106,4 +116,43 @@ public class PromptController {
         promptService.forceDeletePrompt(id);
         return Result.success();
     }
+
+    /**
+     * 下载导入模板
+     * GET /api/prompts/import-template
+     */
+    @GetMapping("/import-template")
+    public void downloadTemplate(HttpServletResponse response) throws IOException {
+        byte[] bytes = promptService.buildImportTemplate();
+        String filename = URLEncoder.encode("提示词导入模板.xlsx", StandardCharsets.UTF_8);
+        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + filename);
+        response.getOutputStream().write(bytes);
+    }
+
+    /**
+     * 导出提示词为 Excel
+     * GET /api/prompts/export
+     */
+    @GetMapping("/export")
+    public void exportPrompts(PromptQueryParam param, HttpServletResponse response) throws IOException {
+        byte[] bytes = promptService.exportToExcel(param);
+        String filename = URLEncoder.encode("提示词导出_" + LocalDate.now() + ".xlsx", StandardCharsets.UTF_8);
+        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + filename);
+        response.getOutputStream().write(bytes);
+    }
+
+    /**
+     * 导入提示词 Excel
+     * POST /api/prompts/import
+     */
+    @PostMapping("/import")
+    public Result<java.util.Map<String, Integer>> importPrompts(@RequestParam("file") MultipartFile file) throws IOException {
+        if (file.isEmpty()) {
+            return Result.error("请上传有效的 Excel 文件");
+        }
+        return Result.success(promptService.importFromExcel(file));
+    }
 }
+

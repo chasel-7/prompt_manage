@@ -21,6 +21,7 @@
 /Users/xiangfang/Developer/projects/prompt_manage/backend/src/main/java/com/promptmanage/mapper/AssistantMapper.java
 /Users/xiangfang/Developer/projects/prompt_manage/backend/src/main/java/com/promptmanage/common/Result.java
 /Users/xiangfang/Developer/projects/prompt_manage/backend/src/main/java/com/promptmanage/dto/GroupRequest.java
+/Users/xiangfang/Developer/projects/prompt_manage/backend/src/main/java/com/promptmanage/config/WebConfig.java
 /Users/xiangfang/Developer/projects/prompt_manage/backend/src/main/java/com/promptmanage/mapper/PromptTagMapper.java
 /Users/xiangfang/Developer/projects/prompt_manage/backend/src/main/java/com/promptmanage/common/GlobalExceptionHandler.java
 /Users/xiangfang/Developer/projects/prompt_manage/backend/src/main/java/com/promptmanage/entity/ChatMessage.java

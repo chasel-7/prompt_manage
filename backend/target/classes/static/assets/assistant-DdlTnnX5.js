@@ -1,0 +1,1 @@
+import{t as e}from"./request-CWmiERK3.js";function t(){return e.get(`/assistants`)}function n(t){return e.get(`/assistants/${t}`)}function r(t){return e.post(`/assistants`,t)}function i(t,n){return e.put(`/assistants/${t}`,n)}function a(t){return e.delete(`/assistants/${t}`)}export{i as a,t as i,a as n,n as r,r as t};

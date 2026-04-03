@@ -26,13 +26,29 @@ public class PolishingController {
     /**
      * 执行润色
      * POST /api/polishing
-     * Body: { "text": "原始文本", "strategy": "professional|structured|specific" }
+     * Body: {
+     *   "text": "原始文本",
+     *   "strategy": "professional|structured|specific",
+     *   "modelConfig": { "model": "gpt-4o", "apiKey": "sk-...", "baseUrl": "https://..." }
+     * }
      */
     @PostMapping
-    public Result<PolishingHistory> polish(@RequestBody Map<String, String> body) {
-        String text = body.get("text");
-        String strategy = body.get("strategy");
-        return Result.success(polishingService.polish(text, strategy));
+    public Result<PolishingHistory> polish(@RequestBody Map<String, Object> body) {
+        String text = (String) body.get("text");
+        String strategy = (String) body.get("strategy");
+
+        // 解析前端传入的模型配置（可选）
+        String model = null;
+        String apiKey = null;
+        String baseUrl = null;
+        Object mc = body.get("modelConfig");
+        if (mc instanceof Map<?, ?> modelConfig) {
+            model   = (String) modelConfig.get("model");
+            apiKey  = (String) modelConfig.get("apiKey");
+            baseUrl = (String) modelConfig.get("baseUrl");
+        }
+
+        return Result.success(polishingService.polish(text, strategy, model, apiKey, baseUrl));
     }
 
     /**
@@ -59,7 +75,6 @@ public class PolishingController {
     /**
      * 将润色结果保存到词库
      * POST /api/polishing/save-to-library
-     * Body: { "title": "标题", "content": "润色后内容", "description": "描述", "groupId": 1 }
      */
     @PostMapping("/save-to-library")
     public Result<Prompt> saveToLibrary(@RequestBody PromptRequest request) {
